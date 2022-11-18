@@ -1,4 +1,4 @@
-package main
+package state
 
 func getStory() *QuestionNode {
 	startNode := &QuestionNode{

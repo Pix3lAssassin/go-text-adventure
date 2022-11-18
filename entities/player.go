@@ -1,21 +1,41 @@
-package main
+package entities
+
+import "github.com/Pix3lAssassin/go-text-adventure/items"
 
 var _ Combatant = (*Player)(nil)
 
 type Player struct {
 	health        float64
 	mana          float64
-	weapon        Weapon
-	helmet        Armor
-	armor         Armor
-	gloves        Armor
-	boots         Armor
+	weapon        items.Weapon
+	helmet        items.Armor
+	armor         items.Armor
+	gloves        items.Armor
+	boots         items.Armor
 	strength      float64
 	agility       float64
 	stealth       float64
 	intelligence  float64
 	combatantType CombatantType
-	inventory     Inventory
+	inventory     items.Inventory
+}
+
+func NewPlayer() *Player {
+	return &Player{
+		health:        100,
+		mana:          100,
+		weapon:        items.Weapon{},
+		helmet:        items.Armor{},
+		armor:         items.Armor{},
+		gloves:        items.Armor{},
+		boots:         items.Armor{},
+		strength:      1,
+		agility:       1,
+		stealth:       1,
+		intelligence:  1,
+		combatantType: PlayerType,
+		inventory:     items.Inventory{},
+	}
 }
 
 func (p *Player) Health() float64 {
@@ -60,24 +80,24 @@ func (p *Player) Attack(c Combatant) float64 {
 	return c.SubtractHealth(p.Weapon().Damage())
 }
 
-func (p *Player) Weapon() Weapon {
-	return p.weapon
+func (p *Player) Weapon() *items.Weapon {
+	return &p.weapon
 }
 
-func (p *Player) Helmet() Armor {
-	return p.helmet
+func (p *Player) Helmet() *items.Armor {
+	return &p.helmet
 }
 
-func (p *Player) Armor() Armor {
-	return p.armor
+func (p *Player) Armor() *items.Armor {
+	return &p.armor
 }
 
-func (p *Player) Gloves() Armor {
-	return p.gloves
+func (p *Player) Gloves() *items.Armor {
+	return &p.gloves
 }
 
-func (p *Player) Boots() Armor {
-	return p.boots
+func (p *Player) Boots() *items.Armor {
+	return &p.boots
 }
 
 func (p *Player) Strength() float64 {
@@ -100,6 +120,6 @@ func (p *Player) Type() CombatantType {
 	return p.combatantType
 }
 
-func (p *Player) Inventory() Inventory {
-	return p.inventory
+func (p *Player) Inventory() *items.Inventory {
+	return &p.inventory
 }

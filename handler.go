@@ -5,9 +5,25 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/Pix3lAssassin/go-text-adventure/entities"
+	"github.com/Pix3lAssassin/go-text-adventure/state"
 )
 
-func start(q *QuestionNode) {
+func start(q *state.QuestionNode) {
+
+	player := entities.NewPlayer()
+
+	gameState := state.GameState{
+		Player: player,
+		Factions: []state.Faction{
+			{},
+		},
+	}
+
+	// TODO Remove this
+	fmt.Print(gameState)
+
 	currentQuestion := q
 
 	scanner := bufio.NewScanner(os.Stdin)
